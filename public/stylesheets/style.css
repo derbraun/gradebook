@@ -6,3 +6,54 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* Formatting for the list */
+ul {
+  list-style: none;
+}
+
+li {
+  background: #fff;
+  width: 500px;
+  min-height: 30px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+/*Delete Button formatting */
+.delete {
+  display: none;
+  margin-left: auto;
+}
+
+/*Make Delete Button transparent*/
+li:hover .delete {
+  display: block;
+}
+
+label {
+  width: 400px;
+}
+
+/* Form */
+
+input[type=text] {
+  font-size: 1em;
+}
+
+select{
+  font-size: 1em;
+}
+
+button {
+  font-size: 1em;
+}
+
+/* Controls */
+
+.controls {
+    margin-top: 20px;
+}
