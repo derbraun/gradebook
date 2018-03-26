@@ -6,7 +6,7 @@ const router = express.Router();
 let grades = [];
 let id = 0;
 
-router.get('/api/grades', (req, res) => {
+router.get('/grades', (req, res) => {
    try {
        res.send(grades);
    }catch {
@@ -14,7 +14,7 @@ router.get('/api/grades', (req, res) => {
    }
 });
 
-router.post('/api/grades', (req, res) => {
+router.post('/grades', (req, res) => {
     id++;
     let grade = {id:id, name:req.body.name, letter:req.body.grade};
     grades.push(grade);
@@ -22,7 +22,7 @@ router.post('/api/grades', (req, res) => {
 });
 
 
-router.put('/api/grades/:id', (req,res) =>{
+router.put('/grades/:id', (req,res) =>{
     //Grab id from request and connect it to its grade
     let id = parseInt(req.params.id);
     let gradesMap = grades.map(grade => {return grade.id});
@@ -43,7 +43,7 @@ router.put('/api/grades/:id', (req,res) =>{
     res.send(grade);
 });
 
-router.delete('/api/grades/:id', (req, res) => {
+router.delete('/grades/:id', (req, res) => {
     //connect id to location in grades
     let id = parseInt(req.params.id);
     let removeIndex = grades.map(grade => {return grade.id; }).indexOf(id);
@@ -58,6 +58,6 @@ router.delete('/api/grades/:id', (req, res) => {
     res.sendStatus(200);
 });
 
-router.listen(3000, () => console.log('Creative Server listening on port 3000'));
+router.listen(8080, () => console.log('Creative Server listening on port 8080'));
 
 module.exports = router;
