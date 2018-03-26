@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 //Setting app to use express
-var app = express().createServer();
+var app = express();
 
 //Setting up body parser
 app.use(bodyParser.json());

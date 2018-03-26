@@ -13,7 +13,8 @@ router.use(function timeLog (req, res, next) {
 })
 
 router.get('/grades', (req, res) => {
-       res.send(grades);
+    console.log("router get called");
+    res.send(grades);
 });
 
 router.post('/grades', (req, res) => {
