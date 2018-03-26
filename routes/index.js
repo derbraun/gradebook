@@ -6,6 +6,12 @@ const router = express.Router();
 let grades = [];
 let id = 0;
 
+// middleware that is specific to this router
+router.use(function timeLog (req, res, next) {
+    console.log('Time: ', Date.now())
+    next()
+})
+
 router.get('/grades', (req, res) => {
    try {
        res.send(grades);
