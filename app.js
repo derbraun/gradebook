@@ -1,4 +1,5 @@
-"use strict";
+require('use-strict');
+
 
 var createError = require('http-errors');
 var express = require('express');
