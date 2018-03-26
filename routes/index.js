@@ -13,11 +13,7 @@ router.use(function timeLog (req, res, next) {
 })
 
 router.get('/grades', (req, res) => {
-   try {
        res.send(grades);
-   }catch {
-       console.log("Get request failed");
-   }
 });
 
 router.post('/grades', (req, res) => {
