@@ -55,7 +55,6 @@ let id = 0;
 
 
 app.get('/grades', (req, res) => {
-    console.log("router get called");
     res.send(grades);
 });
 
@@ -104,9 +103,4 @@ app.delete('/grades/:id', (req, res) => {
 });
 
 
-module.exports = router;
-
-
 app.listen(8080, () => console.log('Creative Server listening on port 8080'));
-
-module.exports = app;
