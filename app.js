@@ -1,4 +1,4 @@
-require('use-strict');
+"use strict";
 
 
 var createError = require('http-errors');
