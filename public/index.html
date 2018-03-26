@@ -24,15 +24,19 @@
     </form>
 
     <div class="controls">
-        <select v-model="grade">
-            <option v-for="l in letters" v-bind:value="l.value">
-                {{p.text}}
-            </option>
-        </select>
+        <button v-on:click="showAll()">Show All</button>
+        <button v-on:click="show_A()">Show only As</button>
+        <button v-on:click="show_B()">Show only Bs</button>
+        <button v-on:click="show_C()">Show only Cs</button>
+        <button v-on:click="show_D()">Show only Ds</button>
+        <button v-on:click="show_E()">Show only Es</button>
     </div>
+
+    <span>Currently Viewing: {{ selected }}</span>
+
     <ul>
         <li v-for="grade in filteredItems" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
-            <label v-bind:class="{ letters: item.letters }"><span>{{ item.text }}</span>   <span>Priority: {{item.priority}}</span></label>
+            <label v-bind:class="{ selected: item.selected }"><span>{{ item.name }}</span>   <span>Grade: {{item.grade}}</span></label>
             <button v-on:click="deleteItem(item)" class="delete">X</button>
         </li>
     </ul>
