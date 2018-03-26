@@ -117,7 +117,7 @@ var app = new Vue({
             }).catch(err => {
                 console.log(err);
             });
-        }
+        },
 
     }
 });
