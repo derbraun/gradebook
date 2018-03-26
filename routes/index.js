@@ -60,6 +60,5 @@ router.delete('/grades/:id', (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(8080, () => console.log('Creative Server listening on port 8080'));
 
 module.exports = router;
