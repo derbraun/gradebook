@@ -25,34 +25,32 @@ var app = new Vue({
                     return item.grade === 'A';
                 });
             }
-            else if(this.selected === 'B'){
+            if(this.selected === 'B'){
                 return this.items.filter(function (item) {
                     return item.grade === 'B';
                 });
             }
-            else if(this.selected === 'C'){
+            if(this.selected === 'C'){
                 return this.items.filter(function (item) {
                     return item.grade === 'C';
                 });
             }
-            else if(this.selected === 'D'){
+            if(this.selected === 'D'){
                 return this.items.filter(function (item) {
                     return item.grade === 'D';
                 });
             }
-            else if(this.selected === 'E'){
+            if(this.selected === 'E'){
                 return this.items.filter(function (item) {
                     return item.grade === 'E';
                 });
             }
 
-            else{
-                return this.items;
-            }
+            return this.items;
 
         }
     },
-    
+
     methods: {
         showAll: function () {
             this.selected = 'ALL';
