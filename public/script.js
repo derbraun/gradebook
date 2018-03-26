@@ -76,7 +76,7 @@ var app = new Vue({
             this.drag = item;
         },
         dropItem: function(item) {
-            axios.put("/api/grades/" + this.drag.id, {
+            axios.put("/grades/" + this.drag.id, {
                 name: this.drag.name,
                 grade: this.drag.grade,
                 selected: this.drag.selected,
@@ -90,7 +90,7 @@ var app = new Vue({
             });
         },
         getItems: function() {
-            axios.get("/api/grades").then(response => {
+            axios.get("/grades").then(response => {
                 this.items = response.data;
                 return true;
             }).catch(err => {
@@ -99,7 +99,7 @@ var app = new Vue({
         },
 
         addItem: function() {
-            axios.post("/api/grades", {
+            axios.post("/grades", {
                 name: this.name,
                 grade: this.grade,
                 selected: this.grade,
@@ -113,7 +113,7 @@ var app = new Vue({
             });
         },
         deleteItem: function(item) {
-            axios.delete("/api/grades/" + item.id).then(response => {
+            axios.delete("/grades/" + item.id).then(response => {
                 this.getItems();
                 return true;
             }).catch(err => {
