@@ -1,5 +1,13 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
+  position: relative;
+  margin: 1rem;
+  padding-bottom: 11rem;
+  min-height: 100%;
   font-family: "Helvetica Neue", Arial, sans-serif;
   background-color: #f8f1da;
 }
