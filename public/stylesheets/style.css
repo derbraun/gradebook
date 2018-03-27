@@ -1,10 +1,7 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f1da;
 }
 
 /* Formatting for the list */
@@ -13,7 +10,7 @@ ul {
 }
 
 li {
-  background: #fff;
+  background: #aaaaaa;
   width: 500px;
   min-height: 30px;
   padding: 10px;
@@ -56,4 +53,14 @@ button {
 
 .controls {
     margin-top: 20px;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #cccccc;
+
 }
