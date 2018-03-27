@@ -18,7 +18,7 @@ ul {
 }
 
 li {
-  background: #A0522D;
+  background: #ccefff;
   width: 500px;
   min-height: 30px;
   padding: 10px;
@@ -32,6 +32,7 @@ li {
 .delete {
   display: none;
   margin-left: auto;
+  background: red;
 }
 
 /*Make Delete Button transparent*/
