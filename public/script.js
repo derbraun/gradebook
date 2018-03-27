@@ -11,7 +11,7 @@ var app = new Vue({
             {text: 'B', value: 'B'},
             {text: 'C', value: 'C'},
             {text: 'D', value: 'D'},
-            {text: 'E because we don\'t fail people', value: 'E'}
+            {text: 'E (because we don\'t fail people)', value: 'E'}
         ]
     },
     created: function () {
