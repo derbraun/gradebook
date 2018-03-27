@@ -99,9 +99,8 @@ var app = new Vue({
             axios.post("/grades", {
                 name: this.name,
                 grade: this.grade,
-                selected: this.selected,
+                selected: this.grade,
             }).then(response => {
-                console.log(this.priority);
                 this.name = "";
                 this.getItems();
                 return true;
