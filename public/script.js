@@ -99,7 +99,7 @@ var app = new Vue({
             axios.post("/grades", {
                 name: this.name,
                 grade: this.grade,
-                selected: this.text,
+                selected: this.selected,
             }).then(response => {
                 this.name = "";
                 this.getItems();
