@@ -99,7 +99,7 @@ var app = new Vue({
             axios.post("/grades", {
                 name: this.name,
                 grade: this.grade,
-                selected: this.grade,
+                selected: this.selected,
             }).then(response => {
                 console.log(this.priority);
                 this.name = "";

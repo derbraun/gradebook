@@ -36,7 +36,7 @@
 
     <ul>
         <li v-for="grade in filteredItems" draggable="true" v-on:dragstart="dragItem(grade)" v-on:dragover.prevent v-on:drop="dropItem(grade)">
-            <label v-bind:class="{ selected: grade.selected }"><span>{{ grade.name }}</span>   <span>Grade: {{grade.grade}}</span></label>
+            <label v-bind:class="{ selected: grade.selected }"><span>Name:{{ grade.name }}</span> <br> <span>Grade: {{grade.grade}}</span></label>
             <button v-on:click="deleteItem(grade)" class="delete">X</button>
         </li>
     </ul>
