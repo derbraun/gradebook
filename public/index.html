@@ -12,7 +12,7 @@
 <h1>Welcome to Gradebook </h1>
 
 <div id="app">
-    <form v-on:submit.prevent="addGrade">
+    <form v-on:submit.prevent="addItem">
         <input type="text" v-model="name">
         <select v-model="grade">
             <option v-for="alpha in letters" v-bind:value="alpha.value">

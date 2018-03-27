@@ -7,7 +7,6 @@ var app = new Vue({
         grade: '',
         selected: 'ALL',
         letters: [
-            {text: 'ALL', value: '0'},
             {text: 'A', value: 'A'},
             {text: 'B', value: 'B'},
             {text: 'C', value: 'C'},
