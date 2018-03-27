@@ -9,16 +9,18 @@
 </head>
 <body>
 
+<h1>Welcome to Gradebook </h1>
+
 <div id="app">
-    <h1>Welcome to Gradebook </h1>
     <form v-on:submit.prevent="addGrade">
         <input type="text" v-model="name">
         <select v-model="grade">
-            <option v-for="l in letters" v-bind:value="l.value">
-                {{p.text}}
+            <option v-for="alpha in letters" v-bind:value="alpha.value">
+                {{alpha.text}}
             </option>
             <button type="submit"> Submit Grade</button>
         </select>
+        <button type="submit">Add</button>
     </form>
 
     <div class="controls">
@@ -33,9 +35,9 @@
     <span>Currently Viewing: {{ selected }}</span>
 
     <ul>
-        <li v-for="grade in filteredItems" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
+        <li v-for="grade in filteredItems" draggable="true" v-on:dragstart="dragItem(grade)" v-on:dragover.prevent v-on:drop="dropItem(grade)">
             <label v-bind:class="{ selected: grade.selected }"><span>{{ grade.name }}</span>   <span>Grade: {{grade.grade}}</span></label>
-            <button v-on:click="deleteItem(item)" class="delete">X</button>
+            <button v-on:click="deleteItem(grade)" class="delete">X</button>
         </li>
     </ul>
 
