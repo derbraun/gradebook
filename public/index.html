@@ -16,7 +16,7 @@
         <input type="text" v-model="name">
         <select v-model="grade">
             <option disabled value="">Please select one</option>
-            <option v-for="alpha in letters" v-bind:value="alpha.value" v-bind:text="alpha.text">
+            <option v-for="alpha in letters" v-bind:value="alpha.value" v-bind:selectedTest="alpha.text">
                 {{alpha.text}}
             </option>
             <button type="submit"> Submit Grade</button>

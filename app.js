@@ -28,7 +28,7 @@ app.get('/grades', (req, res) => {
 
 app.post('/grades', (req, res) => {
     id++;
-    let grade = {id:id, name:req.body.name, grade:req.body.grade, selected:req.body.selected};
+    let grade = {id:id, name:req.body.name, grade:req.body.grade, selected:req.body.selectedText};
     grades.push(grade);
     res.send(grade);
 });

@@ -6,6 +6,7 @@ var app = new Vue({
         drag: {},
         grade: '',
         selected: 'ALL',
+        selectedText: '',
         letters: [
             {text: 'A', value: 'A'},
             {text: 'B', value: 'B'},
@@ -99,7 +100,7 @@ var app = new Vue({
             axios.post("/grades", {
                 name: this.name,
                 grade: this.grade,
-                selected: this.selected,
+                selected: this.selectedText,
             }).then(response => {
                 this.name = "";
                 this.getItems();
