@@ -30,18 +30,13 @@ module.exports = {
     },
 
     production: {
-        client: 'postgresql',
+        client: 'mariasql',
         connection: {
-            database: 'my_db',
-            user:     'username',
-            password: 'password'
-        },
-        pool: {
-            min: 2,
-            max: 10
-        },
-        migrations: {
-            tableName: 'knex_migrations'
+            host: '127.0.0.1',
+            user: 'programmer',
+            password: 'programmer162',
+            db: 'gradebook',
+            charset: 'utf8',
         }
     }
 
