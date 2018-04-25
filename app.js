@@ -18,7 +18,7 @@ const config = require('./knexfile')[env];
 const knex = require('knex')(config);
 
 //bcrypt setup
-let bcrypt = require('bcrypt');
+let bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 
