@@ -19,7 +19,7 @@
         name: "Main",
         components: {Register, Grades,Login},
         computed: {
-            cache: false,
+            cache: true,
             loggedIn: function () {
                 return this.$store.getters.loggedIn;
             }
