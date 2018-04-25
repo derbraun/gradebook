@@ -12,7 +12,7 @@ export default {
 
 <style>
   html {
-    height: 100%;
+    height: 75%;
     box-sizing: border-box;
   }
 
@@ -41,18 +41,6 @@ export default {
     align-items: center;
   }
 
-  /*Delete Button formatting */
-  .delete {
-    display: none;
-    margin-left: auto;
-    background: red;
-  }
-
-  /*Make Delete Button transparent*/
-  li:hover .delete {
-    display: block;
-  }
-
   label {
     width: 400px;
   }
@@ -61,6 +49,7 @@ export default {
 
   input[type=text] {
     font-size: 1em;
+    padding: .5em;
   }
 
   select{
@@ -69,7 +58,8 @@ export default {
 
   button {
     font-size: 1em;
-    background: #ccefff;
+    background: #5c9eff;
+    padding: .5em;
   }
 
   /* Controls */

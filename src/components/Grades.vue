@@ -1,37 +1,42 @@
 <template>
-    <h1>Welcome to Gradebook </h1>
+    <div>
+        <span class="right" ><a @click="logout" href="#">Logout</a></span>
+        <h1>Welcome to Gradebook </h1>
 
-    <div id="app">
-        <form v-on:submit.prevent="addItem">
-            <input type="text" v-model="name">
-            <select v-model="grade">
-                <option disabled value="">Please select one</option>
-                <option v-for="alpha in letters" v-bind:value="alpha.value">
-                    {{alpha.text}}
-                </option>
-                <button type="submit"> Submit Grade</button>
-            </select>
-            <button type="submit">Add</button>
-        </form>
 
-        <div class="controls">
-            <button v-on:click="showAll()">Show All</button>
-            <button v-on:click="show_A()">Show only As</button>
-            <button v-on:click="show_B()">Show only Bs</button>
-            <button v-on:click="show_C()">Show only Cs</button>
-            <button v-on:click="show_D()">Show only Ds</button>
-            <button v-on:click="show_E()">Show only Es</button>
+        <div id="app">
+            <form v-on:submit.prevent="addItem">
+                <input type="text" v-model="student" placeholder="Enter Student's Name">
+                <select v-model="grade">
+                    <option disabled value="">Please select one</option>
+                    <option v-for="alpha in letters" v-bind:value="alpha.value">
+                        {{alpha.text}}
+                    </option>
+                    <button type="submit"> Submit Grade</button>
+                </select>
+                <input type = "text" v-model="desc" placeholder="Enter the Name of the Assignment">
+                <button type="submit">Add</button>
+            </form>
+
+            <div class="controls">
+                <button v-on:click="showAll()">Show All</button>
+                <button v-on:click="show_A()">Show only As</button>
+                <button v-on:click="show_B()">Show only Bs</button>
+                <button v-on:click="show_C()">Show only Cs</button>
+                <button v-on:click="show_D()">Show only Ds</button>
+                <button v-on:click="show_E()">Show only Es</button>
+            </div>
+            <br />
+            <span>Currently Viewing: {{ selected }} Grades</span>
+
+            <ul>
+                <li v-for="grade in filteredItems">
+                    <label v-bind:class="{ selected: grade.selected }"><span id = name><u>Name: {{ grade.student }}</u></span> <br><br>
+                        <span>Grade: {{grade.grade}}</span>
+                        <span id="desc">Desc: {{ grade.desc}}</span></label>
+                </li>
+            </ul>
         </div>
-        <br />
-        <span>Currently Viewing: {{ selected }} Grades</span>
-
-        <ul>
-            <li v-for="grade in filteredItems" draggable="true" v-on:dragstart="dragItem(grade)" v-on:dragover.prevent v-on:drop="dropItem(grade)">
-                <label v-bind:class="{ selected: grade.selected }"><span>Name:{{ grade.name }}</span> <br> <span>Grade: {{grade.grade}}</span></label>
-                <button v-on:click="deleteItem(grade)" class="delete">X</button>
-            </li>
-        </ul>
-
     </div>
 
 </template>
@@ -40,15 +45,29 @@
     export default {
         name: "Grades",
         data(){
-          return{
-              selected: 'ALL',
-          }
+            return{
+                student: '',
+                desc: '',
+                grade: '',
+                selected: 'ALL',
+                letters: [
+                    {text: 'A', value: 'A'},
+                    {text: 'B', value: 'B'},
+                    {text: 'C', value: 'C'},
+                    {text: 'D', value: 'D'},
+                    {text: 'E (because we don\'t fail people)', value: 'E'}
+                ],
+            }
         },
 
         created: function () {
             this.getItems();
         },
         computed: {
+            items: function(){
+                return this.$store.getters.items;
+            },
+
             filteredItems: function () {
                 if (this.selected === 'A') {
                     return this.items.filter(function (item) {
@@ -81,11 +100,12 @@
             }
         },
 
+
         methods: {
 
             //Filter Buttons
             showAll: function () {
-                 this.selected= 'ALL';
+                this.selected= 'ALL';
             },
             show_A: function () {
                 this.selected = 'A';
@@ -102,59 +122,39 @@
             show_E: function () {
                 this.selected = 'E';
             },
-            dragItem: function (item) {
-                this.drag = item;
-            },
 
-            //TODO: Call from the store here.
-            dropItem: function (item) {
-                axios.put("/grades/" + this.drag.id, {
-                    name: this.drag.name,
-                    grade: this.drag.grade,
-                    selected: this.drag.selected,
-                    orderChange: true,
-                    orderTarget: item.id,
-                }).then(response => {
-                    this.getItems();
-                    return true;
-                }).catch(err => {
-                    console.log(err);
-                });
-            },
             getItems: function () {
-                axios.get("/grades").then(response => {
-                    this.items = response.data;
-                    return true;
-                }).catch(err => {
-                    console.log(err);
-                });
+                this.$store.dispatch('getItems');
+
             },
 
             addItem: function () {
-                axios.post("/grades", {
-                    name: this.name,
+                console.log("Student is:" + this.student);
+
+                this.$store.dispatch('addItem',{
+                    student: this.student,
                     grade: this.grade,
-                    selected: this.selected,
+                    desc: this.desc,
                 }).then(response => {
-                    this.name = "";
-                    this.getItems();
-                    return true;
-                }).catch(err => {
-                    console.log(err);
+                    this.student = "";
+                    this.grade = "";
+                    this.desc = "";
                 });
+
             },
-            deleteItem: function (item) {
-                axios.delete("/grades/" + item.id).then(response => {
-                    this.getItems();
-                    return true;
-                }).catch(err => {
-                    console.log(err);
-                });
+            logout: function() {
+                this.$store.dispatch('logout');
             },
         }
     }
 </script>
 
 <style scoped>
+    #desc{
+        padding-left: 10em;
+    }
+    #name{
+        font-size: 1.5em;
 
+    }
 </style>

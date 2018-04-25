@@ -7,50 +7,24 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state:{
         items: [],
-        name: '',
-        drag: {},
-        grade: '',
-        selectedText: '',
-        letters: [
-            {text: 'A', value: 'A'},
-            {text: 'B', value: 'B'},
-            {text: 'C', value: 'C'},
-            {text: 'D', value: 'D'},
-            {text: 'E (because we don\'t fail people)', value: 'E'}
-        ],
+        user: {},
         loggedIn: false,
         loginError: '',
+        record: {},
     },
 
     getters: {
         items: state => state.items,
-        name: state => state.name,
-        drag: state => state.drag,
-        grade: state => state.grade,
-        selectedText: state => state.selectedText,
-        letters: state => state.letters,
         loggedIn: state => state.loggedIn,
         loginError: state => state.loginError,
+        desc: state => state.desc,
+        user: state => state.user,
+        record: state => state.record,
     },
 
     mutations: {
         setItems(state,items){
             state.items = items;
-        },
-        setName(state,name){
-            state.name = name;
-        },
-        setDrag(state,drag){
-            state.drag = drag;
-        },
-        setGrade(state,grade){
-            state.grade = grade;
-        },
-        setSelectedText(state,selectedText){
-            state.selectedText = selectedText;
-        },
-        setLetters(state,letters){
-            state.letters = letters;
         },
         setLogin(state,status){
             state.loggedIn = status;
@@ -58,87 +32,79 @@ export default new Vuex.Store({
         setLoginError(state, message){
             state.loginError = message;
         },
-
+        setUser(state,user){
+            state.user = user;
+        },
+        setGrade(state,grade){
+            state.grade = grade;
+        },
+        setRecord(state,record){
+            state.record = record;
+        }
     },
 
     actions:{
 
         //Login call for user
-        login(context, user){
-            axios.post("/grades/login", user).then(response =>{
+        login(context,user) {
+            console.log("In login store");
+
+            axios.post("/api/login",user).then(response => {
                 context.commit('setUser', response.data.user);
-                context.commit('setLogin', true);
-                context.commit('setRegisterError', "");
-                context.commit('setLoginError', "");
+                context.commit('setLogin',true);
+                context.commit('setLoginError',"");
             }).catch(error => {
-                context.commit('setRegisterError', "");
                 if (error.response) {
                     if (error.response.status === 403 || error.response.status === 400)
-                        context.commit('setLoginError', "Invalid login.");
-                    context.commit('setRegisterError', "");
+                        context.commit('setLoginError',"Invalid login.");
                     return;
                 }
-                context.commit('setLoginError', "Sorry, your request failed. We will look into it.");
+                context.commit('setLoginError',"Sorry, your request failed. We will look into it.");
             });
         },
 
         //Call to log user out
-        logout(context, user) {
+        logout(context,user) {
             context.commit('setUser', {});
-            context.commit('setLogin', false);
+            context.commit('setLogin',false);
         },
 
-        //Allows Drag and Drop in Chrome
-        dragItem: function (item) {
-            this.drag = item;
-        },
 
-        dropItem: function (item) {
-            axios.put("/grades/" + this.drag.id, {
-                name: this.drag.name,
-                grade: this.drag.grade,
-                selected: this.drag.selected,
-                orderChange: true,
-                orderTarget: item.id,
-            }).then(response => {
-                this.getItems();
-                return true;
-            }).catch(err => {
-                console.log(err);
+        //Register call
+        register(context,user) {
+            axios.post("/api/users",user).then(response => {
+                context.commit('setUser', response.data.user);
+                context.commit('setLogin',true);
+                context.commit('setLoginError',"");
+            }).catch(error => {
+                context.commit('setLoginError',"");
+                context.commit('setLogin',false);
+
+                //403 error = email exists
+                //409 error = username exists
+
             });
         },
 
         //Calls for all items from server
-        getItems: function () {
-            axios.get("/grades").then(response => {
-                this.items = response.data;
-                return true;
+        getItems(context) {
+
+            axios.get("/api/grades").then(response => {
+                context.commit('setItems', response.data.grades[0]);
             }).catch(err => {
+                console.log("Something blew up on getItems axios call");
                 console.log(err);
             });
         },
 
         //Adds an item to the server
-        addItem: function () {
-            axios.post("/grades", {
-                name: this.name,
-                grade: this.grade,
-                selected: this.selected,
-            }).then(response => {
-                this.name = "";
-                this.getItems();
-                return true;
-            }).catch(err => {
-                console.log(err);
-            });
-        },
+        addItem: function (context, record) {
 
-        //Removes an Item from the server
-        deleteItem: function (item) {
-            axios.delete("/grades/" + item.id).then(response => {
-                this.getItems();
-                return true;
+            axios.post("/api/grades", record).then(response => {
+                context.commit('setRecord', response.data.record);
+
             }).catch(err => {
+                console.log("Something blew up on addItem axios call");
                 console.log(err);
             });
         },
