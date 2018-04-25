@@ -101,7 +101,12 @@
             }
         },
 
-
+        watch: {
+            // whenever item changes, this function will run
+            items: function (newItems, oldItems) {
+                return this.$store.getters.items;
+            }
+        },
         methods: {
 
             //Filter Buttons
@@ -141,6 +146,8 @@
                     this.grade = "";
                     this.desc = "";
                 });
+
+                this.getItems();
 
             },
             logout: function() {
