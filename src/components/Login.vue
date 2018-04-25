@@ -30,6 +30,7 @@
             }
         },
         computed: {
+            cache: false,
             user: function() {
                 return this.$store.getters.user;
             },

@@ -64,6 +64,7 @@
             this.getItems();
         },
         computed: {
+            cache: false,
             items: function(){
                 return this.$store.getters.items;
             },
